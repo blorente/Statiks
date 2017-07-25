@@ -1,18 +1,18 @@
 import sys
 from antlr4 import *
-from TournamentSummaryLexer import TournamentSummaryLexer
-from TournamentSummaryParser import TournamentSummaryParser
-from TSParser import TSParser
+from statiks.TS import TS
+from statiks.grammars.TSParserLexer import TSParserLexer
+from statiks.grammars.TSParserParser import TSParserParser
+
 
 def main(argv):
     input = FileStream(argv[1])
-    lexer = TournamentSummaryLexer(input)
+    lexer = TSParserLexer(input)
     stream = CommonTokenStream(lexer)
-    parser = TournamentSummaryParser(stream)
+    parser = TSParserParser(stream)
     tree = parser.ts()
-    printer = TSParser()
+    printer =  TS()
     walker = ParseTreeWalker()
     walker.walk(printer, tree)
 
-if __name__ == '__main__':
-    main(sys.argv)
+main(sys.argv)
